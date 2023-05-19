@@ -26,6 +26,11 @@ class AppContainer extends HTMLElement {
         this.shadowRoot?.appendChild(login);
         break;
 
+        case Screens.REGISTER:
+        const register = this.ownerDocument.createElement("app-register");
+        this.shadowRoot?.appendChild(register);
+        break;
+
       default:
         break;
     }

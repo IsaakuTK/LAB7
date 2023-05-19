@@ -1,5 +1,8 @@
 
 import "../../components/export";
+import { dispatch } from "../../store";
+import { navigate } from "../../store/actions";
+import { Screens } from "../../types/navigation";
 export default class Login extends HTMLElement {
   constructor() {
     super();
@@ -10,6 +13,11 @@ export default class Login extends HTMLElement {
     this.render();
   }
 
+  nav() {
+    dispatch(navigate(Screens.REGISTER));
+  }
+
+
 
   render() {
     const title = this.ownerDocument.createElement("h1");
@@ -18,6 +26,11 @@ export default class Login extends HTMLElement {
 
     const login = this.ownerDocument.createElement("my-login");
     this.shadowRoot?.appendChild(login);
+
+    const other = this.ownerDocument.createElement("button");
+    other.innerText = "No have a account?";
+    other.addEventListener("click", this.nav);
+    this.shadowRoot?.appendChild(other);
   }
 }
 

@@ -16,8 +16,6 @@ export default class login extends HTMLElement{
     connectedCallback() {
         this.render();
       }
-
-
       async LoginButton() {
         const resp = await firebase.loginUser(credentials);
         if (resp) {
@@ -28,37 +26,44 @@ export default class login extends HTMLElement{
         console.log(resp);
       }
 
+
+
       render(){
         if(this.shadowRoot){
             this.shadowRoot.innerHTML=``;
+
+            const container = this.ownerDocument.createElement("section");
+
+
             const email = this.ownerDocument.createElement("input");
-    email.placeholder = "email";
-    email.type = "email";
-    email.addEventListener(
-      "change",
-      (e: any) => (credentials.email = e.target.value)
-    );
-    this.shadowRoot?.appendChild(email);
+            email.placeholder = "email";
+            email.type = "email";
+            email.addEventListener(
+              "change",
+              (e: any) => (credentials.email = e.target.value)
+            );
+            container?.appendChild(email);
 
-    const password = this.ownerDocument.createElement("input");
-    password.placeholder = "password";
-    password.type = "password";
-    password.addEventListener(
-      "change",
-      (e: any) => (credentials.password = e.target.value)
-    );
-    this.shadowRoot?.appendChild(password);
+            const password = this.ownerDocument.createElement("input");
+            password.placeholder = "password";
+            password.type = "password";
+            password.addEventListener(
+              "change",
+              (e: any) => (credentials.password = e.target.value)
+            );
 
-    const loginBtn = this.ownerDocument.createElement("button");
-    loginBtn.innerText = "login";
-    loginBtn.addEventListener("click", this.LoginButton);
-    this.shadowRoot?.appendChild(loginBtn);
+            container?.appendChild(password);
 
+            const loginBtn = this.ownerDocument.createElement("button");
+            loginBtn.innerText = "LogIn";
+            loginBtn.addEventListener("click", this.LoginButton);
+            container?.appendChild(loginBtn);
 
-    const css = this.ownerDocument.createElement("style");     
-    css.innerHTML = styles;
-    this.shadowRoot?.appendChild(css);
+            this.shadowRoot?.appendChild(container)
 
+            const css = this.ownerDocument.createElement("style");     
+            css.innerHTML = styles;
+            this.shadowRoot?.appendChild(css);
         }
     }
 }

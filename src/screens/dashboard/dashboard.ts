@@ -1,3 +1,4 @@
+import { addObserver } from "../../store";
 import { Product } from "../../types/products";
 import Firebase from "../../utils/firebase";
 
